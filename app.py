@@ -40,7 +40,8 @@ def scan_save(img_path):
     #after process - save each digit
     edges,dilated = process(bw_image)
     new_image,contours,res = manage_contours(edges,bw_image.copy())
-    save_and_process_individual_images(res)
+    res = process_individual_images(res)
+    return res   #this is imoprtant
 
 
 #functions to extract each digits
@@ -62,18 +63,21 @@ def manage_contours(image,orig_image):
         results.append(small_image)
     return orig_image,contours,results
 
-def save_and_process_individual_images(ilist):
-    for c,img in enumerate(ilist):
-        edg,dil = process(img)
-        path = './static/extracted'
-        cv2.imwrite(os.path.join(path , str(c)+".jpg"), dil)
+def process_individual_images(ilist):
+    dil = []
+    for img in (ilist):
+        edge, dilated = process(img)
+        dil.append(dilated)
+    return dil
+        
+    
 
-def get_processed_images(ilist):
-    res = []
-    for img in ilist:
-        edg,dil = process(img)
-        res.append((edg,dil))
-    return res
+# def get_processed_images(ilist):
+#     res = []
+#     for img in ilist:
+#         edg,dil = process(img)
+#         res.append((edg,dil))
+#     return res
 
 def delete_all_files():
     directory1 = './static/extracted'  # folder with images
@@ -91,12 +95,12 @@ def delete_all_files():
 
 #functions to predict the labels
 directory = './static/extracted'
-def cnn_predict():
+def cnn_predict(small_images):
     predicted_cnn = []
-    for filename in os.scandir(directory):
-        img = cv2.imread(filename.path)
+    for image in small_images:
+        img = image
         img = cv2.resize(img, (28,28))
-        img = img[:, :, 0]
+        # img = img[:, :, 0]
         img = img.reshape(1,28,28,1)
         img = img.astype('float32')
         img = img/255.0
@@ -111,13 +115,14 @@ def main():
     delete_all_files()
     #if there if a post request
     if request.method == 'POST':
+        result = []
         ori_img = request.files['img_uploaded']
         img_path = "./static/uploaded/ori_" + ori_img.filename
         ori_img.save(img_path)
-        scan_save(img_path)
+        result = scan_save(img_path)
 
         cnn_pred= []
-        cnn_pred = cnn_predict()
+        cnn_pred = cnn_predict(result)
         detected_ans = ""
         for ans in cnn_pred:
             detected_ans += ans
