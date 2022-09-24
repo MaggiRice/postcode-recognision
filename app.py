@@ -79,19 +79,19 @@ def process_individual_images(ilist):
 #         res.append((edg,dil))
 #     return res
 
-def delete_all_files():
-    directory1 = './static/extracted'  # folder with images
-    for filename in os.scandir(directory1):
-        if filename.is_file():
-            os.remove(filename.path)
-    directory2 = './static/scanned'  # folder with images
-    for filename in os.scandir(directory2):
-        if filename.is_file():
-            os.remove(filename.path)
-    directory3 = './static/uploaded'  # folder with images
-    for filename in os.scandir(directory3):
-        if filename.is_file():
-            os.remove(filename.path)
+# def delete_all_files():
+#     directory1 = './static/extracted'  # folder with images
+#     for filename in os.scandir(directory1):
+#         if filename.is_file():
+#             os.remove(filename.path)
+#     directory2 = './static/scanned'  # folder with images
+#     for filename in os.scandir(directory2):
+#         if filename.is_file():
+#             os.remove(filename.path)
+#     directory3 = './static/uploaded'  # folder with images
+#     for filename in os.scandir(directory3):
+#         if filename.is_file():
+#             os.remove(filename.path)
 
 #functions to predict the labels
 directory = './static/extracted'
@@ -112,7 +112,6 @@ def cnn_predict(small_images):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     #clear all images within folder when start the website
-    delete_all_files()
     #if there if a post request
     if request.method == 'POST':
         result = []
