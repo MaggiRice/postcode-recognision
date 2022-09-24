@@ -70,31 +70,8 @@ def process_individual_images(ilist):
         dil.append(dilated)
     return dil
         
-    
-
-# def get_processed_images(ilist):
-#     res = []
-#     for img in ilist:
-#         edg,dil = process(img)
-#         res.append((edg,dil))
-#     return res
-
-# def delete_all_files():
-#     directory1 = './static/extracted'  # folder with images
-#     for filename in os.scandir(directory1):
-#         if filename.is_file():
-#             os.remove(filename.path)
-#     directory2 = './static/scanned'  # folder with images
-#     for filename in os.scandir(directory2):
-#         if filename.is_file():
-#             os.remove(filename.path)
-#     directory3 = './static/uploaded'  # folder with images
-#     for filename in os.scandir(directory3):
-#         if filename.is_file():
-#             os.remove(filename.path)
 
 #functions to predict the labels
-directory = './static/extracted'
 def cnn_predict(small_images):
     predicted_cnn = []
     for image in small_images:
