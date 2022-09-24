@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    <h1>CNN</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <div>
+          <label>Upload The Image :</label>
+          <div>          
+            <input type="file" name="img_uploaded">
+          </div>
+        </div>
+    
+        <div>        
+          <div>
+            <button type="submit">Submit & Predict</button>
+          </div>
+        </div>
+      </form>
+    
+      {% if prediction %}
+      <div>
+          <img src="{{img_path}}" height="250px" width="250px"><br>
+      </div>
+      <input type="text" id="user-input" value={{prediction}}>
+      <button id="button">Search Postal Code</button>
+      <table class="table" cellpadding="10">
+        <thead>
+        <tr>
+        <th scope="col">Post Code</th>
+        <th scope="col">Address</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        </tr>
+        </thead>
+        <tbody>
+        </div>
+        </div>
+        </div>
+      </table>
+    {% endif %}
+    <script>
+      d3.csv("static/postalCodesData.csv").then(function (data) {
+      for (var i = 0; i < data.length; i++) {
+          console.log(data[i].postcode);
+          console.log(data[i].address);
+          console.log(data[i].city);
+          console.log(data[i].state);
+      }
+      var movies = data;
+      var button = d3.select("#button");
+      var form = d3.select("#form");
+      button.on("click", runEnter);
+      form.on("submit", runEnter);
+
+      function runEnter() {
+
+        d3.select("tbody").html("") 
+    
+        d3.event.preventDefault(); 
+    
+        var inputValue = d3.select("#user-input").property("value");
+    
+        var filteredMovies = movies.filter(movies => movies.postcode.includes(inputValue));
+    
+        for (var i = 0; i < filteredMovies.length; i++) {
+        d3.select("tbody").insert("tr").html(
+        "<td>" + [i+1] + "</td>" +
+        "<td>" + (filteredMovies[i]['postcode'])+"</a>"+"</td>" + 
+        "<td>" + (filteredMovies[i]['address'])+"</td>" +
+        "<td>" + (filteredMovies[i]['city'])+"</td>" +
+        "<td>" + (filteredMovies[i]['state'])+"</td" ) }
+      };
+      });
+    </script>
+</body>
+</html>
