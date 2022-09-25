@@ -4,47 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction</title>
+    <title>Postal Code Recognition</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="static\css\style.css">
 </head>
 <body>
-    <h1>CNN</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
+    <header>
+      <h2>Bonjour Object Recognition!</h2>
+    </header>
+    <h1>Handwritten Postal Code Recognition Web App</h1>
+    <p>
+      This is Web App will recognise Postal Code within Malaysia and display all the places within this area. <br>
+      The model is built using the Convolutional Neural Network (CNN) on the MNIST dataset.
+    </p>
+    <br>
+    <div id="contents">
+      <form action="/" method="post" enctype="multipart/form-data">
         <div>
           <label>Upload The Image :</label>
-          <div>          
+          <div id="choose_file"> 
             <input type="file" name="img_uploaded">
           </div>
         </div>
-    
+        <br>
         <div>        
           <div>
-            <button type="submit">Submit & Predict</button>
+            <button type="submit">Submit & Read</button>
           </div>
         </div>
       </form>
     
       {% if prediction %}
-      <div>
-          <img src="{{img_path}}" height="250px" width="250px"><br>
-      </div>
-      <input type="text" id="user-input" value={{prediction}}>
-      <button id="button">Search Postal Code</button>
-      <table class="table" cellpadding="10">
-        <thead>
-        <tr>
-        <th scope="col">Post Code</th>
-        <th scope="col">Address</th>
-        <th scope="col">City</th>
-        <th scope="col">State</th>
-        </tr>
-        </thead>
-        <tbody>
+        <div>
+            <img src="{{img_path}}">
         </div>
-        </div>
-        </div>
-      </table>
-    {% endif %}
+        <input type="text" id="user-input" value={{prediction}}><br>
+        <button id="button">Search Postal Code</button>
+        <table class="table" cellpadding="15">
+          <thead>
+            <tr>
+              <th scope="col">Post Code</th>
+              <th scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">State</th>
+              <th scope="col">Abbr</th>
+            </tr>
+          </thead>
+          <tbody>
+        </table>
+      {% endif %}
+    </div>
+    <footer>
+      <h2>Thank you for using us</h2>
+    </footer>
+    
+    <!--JavaScript-->
     <script>
       d3.csv("static/postalCodesData.csv").then(function (data) {
       for (var i = 0; i < data.length; i++) {

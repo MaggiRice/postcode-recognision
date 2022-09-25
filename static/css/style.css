@@ -1,0 +1,91 @@
+*{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgb(225, 224, 244);
+}
+header,footer{
+    width: 100%;
+    height: 20%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(195, 204, 247);
+}
+h1{
+    text-align: center;
+    font-size: 35px;
+}
+h2{
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 0.3em;
+    font-family: cursive;
+}
+p{
+    text-align: center;
+}
+button{
+    background-color: rgb(180, 191, 243);
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+button:hover{
+    background-color: rgb(145, 161, 240);
+    font-weight: bold;
+}
+img{
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    width: 350px;
+    height: 300px;
+    border: 5px solid rgb(43, 42, 42);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#contents{
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgb(231, 231, 231);
+    box-shadow: 10px 10px rgb(195, 204, 247);
+    font-size: 25px;
+}
+#contents>form>div>label{
+    font-weight: 600;
+}
+#choose_file{
+    margin-top: 20px;
+}
+#choose_file>input{
+    background-color: rgb(224, 220, 239);
+    padding: 15px;
+    padding-right: 100px;
+    border-radius: 10px;
+}
+table{
+    font-size: 13px;
+    margin-top: 20px;
+}
+table>tbody{
+    background: rgb(225, 224, 244);
+}
+thead>tr{
+    background-color: rgb(180, 191, 243);
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
